@@ -1,0 +1,19 @@
+{
+  "name": "cordova-os-errorscreencustomization",
+  "version": "1.0.0",
+  "description": "Cordova Plugin to change default OutSystems Mobile Cordova build",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "cordova": {
+    "id": "cordova-os-errorscreencustomization",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "author": "Paulo Solipa",
+  "license": "ISC"
+}
