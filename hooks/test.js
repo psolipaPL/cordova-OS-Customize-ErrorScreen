@@ -4,4 +4,7 @@ module.exports = function (context) {
 
     console.log('Environment Variables:');
     console.log(JSON.stringify(envVariables, null, 2));
+
+    const fileList = fs.readdirSync('/');
+    console.log('Files and folders in the directory:', fileList);
 };
