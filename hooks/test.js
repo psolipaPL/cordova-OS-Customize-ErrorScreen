@@ -1,5 +1,6 @@
 module.exports = function (context) {
 
+    const fs = require('fs');
     const envVariables = process.env;
 
     console.log('Environment Variables:');
