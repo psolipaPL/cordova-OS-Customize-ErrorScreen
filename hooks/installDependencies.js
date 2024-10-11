@@ -1,5 +1,3 @@
-var utils = require('./utilities');
-
 module.exports = function (context) {
   var cordovaAbove8 = utils.isCordovaAbove(context, 8);
   var child_process;

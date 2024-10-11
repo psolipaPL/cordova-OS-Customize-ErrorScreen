@@ -1,5 +1,6 @@
 const fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    htmlParser = require('node-html-parser');
 
 //Initial configs
 const configs = {
@@ -7,19 +8,43 @@ const configs = {
     androidPath: "/platforms/android/app/src/main/assets/www/",
     androidMainPath: "/platforms/android/app/src/main/",
     androidAppPath: "/platforms/android/app/",
-    configPathAndroid: "/platforms/android/app/src/main/res/xml/config.xml",
-    configPathIos: "/platforms/ios/ECOP Mobile/config.xml",
+    iosPath: "/platforms/ios/www/",
+    iosMainPath: "/platforms/ios/",
+    errorFile: '_error.html',
 };
 
-function getConfigs() {
+const getConfigs = () => {
     return configs;
 }
 
-function readFile(filePath) {
-    return fs.readFileSync(filePath, "utf-8");
+
+const readFile = (filePath) => {
+    try {
+        return fs.readFileSync(filePath, "utf-8");
+    } catch (error) {
+        console.error(`Error: ${error}`)
+    }
 }
 
-function errorFileReplacer(errorPath, content, textToReplace, replacementText) {
+const parseHTML = (content) => {
+    return htmlParser.parse(content);
+}
+
+const replaceHTMLContent = (sourceFilePath, targetFilePath, selector) => {
+    try {
+        const sourceFile = parseHTML(readFile(sourceFilePath));
+        const targetFile = parseHTML(readFile(targetFilePath));
+
+        targetFile.querySelector(selector).toString() = sourceFile.querySelector(selector).toString()
+        fs.writeFileSync(targetFilePath, targetFile);
+
+
+    } catch (error) {
+        console.error(`Error: ${error}`)
+    }
+}
+
+const errorFileReplacer = (errorPath, content, textToReplace, replacementText) => {
     content = content.replace(textToReplace, replacementText);
     fs.writeFileSync(errorPath, content, "utf-8");
 }
@@ -27,5 +52,10 @@ function errorFileReplacer(errorPath, content, textToReplace, replacementText) {
 module.exports = {
     getConfigs,
     readFile,
-    errorFileReplacer
+    errorFileReplacer,
+    parseHTML,
+    replaceHTMLContent
 }
+/*module.exports = function(context) {
+
+}*/
