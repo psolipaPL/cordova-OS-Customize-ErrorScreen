@@ -13,7 +13,9 @@ module.exports = function (context) {
     deferral = context.requireCordovaModule('q').defer();
   }
 
-  const output = child_process.exec('npm install', {cwd: __dirname}, function (error) {
+  const hooksDir = path.join(context.opts.plugin.dir, 'hooks');
+
+  const output = child_process.exec('npm install', {cwd: hooksDir}, function (error) {
     if (error !== null) {
       console.log('exec error: ' + error);
       deferral.reject('npm installation failed');
