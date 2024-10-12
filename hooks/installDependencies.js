@@ -14,6 +14,7 @@ module.exports = function (context) {
   }
 
   const hooksDir = path.join(context.opts.plugin.dir, 'hooks');
+  console.log(`Hooks dir: ${hooksDir}`)
 
   const output = child_process.exec('npm install', {cwd: hooksDir}, function (error) {
     if (error !== null) {
