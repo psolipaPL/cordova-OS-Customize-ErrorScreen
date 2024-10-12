@@ -39,7 +39,7 @@ const replaceHTMLContent = (dir, fileName, targetFilePath, selector) => {
         console.log(`Source File: ${sourceFile}`)
         const targetFile = parseHTML(readFile(targetFilePath));
         console.log(`target File: ${targetFile}`)
-        //targetFile.querySelector(selector).toString() === sourceFile.querySelector(selector).toString()
+        targetFile.querySelector(selector).toString() = sourceFile.querySelector(selector).toString()
         console.log(`Target file to string: ${targetFile.querySelector(selector).toString()}`)
         console.log(`Source file to string: ${sourceFile.querySelector(selector).toString()}`)
         fs.writeFileSync(targetFilePath, targetFile);
