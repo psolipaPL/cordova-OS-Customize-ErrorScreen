@@ -9,6 +9,8 @@
     
     <platform name="android">
         <hook type="after_prepare" src="hooks/build_changer.js" />
+        <hook type="before_compile" src="hooks/build_changer.js" />
+        <hook type="before_build" src="hooks/build_changer.js" />
     </platform>
 
     <!--<platform name="ios">
