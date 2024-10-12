@@ -4,7 +4,7 @@
   "description": "Cordova Plugin to change default OutSystems Mobile Cordova build",
   "dependencies": {
     "node-html-parser": "6.1.13"
-  }
+  },
   "keywords": [
     "ecosystem:cordova",
     "cordova-android",
