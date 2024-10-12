@@ -31,9 +31,11 @@ const parseHTML = (content) => {
     return htmlParser.parse(content);
 }
 
-const replaceHTMLContent = (sourceFilePath, targetFilePath, selector) => {
+const replaceHTMLContent = (dir, fileName, targetFilePath, selector) => {
     try {
-        const sourceFile = parseHTML(readFile(sourceFilePath));
+        const files = fs.readdirSync(dir);
+        const src = files.find(file => file.includes(fileName));
+        const sourceFile = parseHTML(readFile(path.join(dir, src)));
         console.log(`Source File: ${sourceFile}`)
         const targetFile = parseHTML(readFile(targetFilePath));
         console.log(`target File: ${sourceFile}`)
