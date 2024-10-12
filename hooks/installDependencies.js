@@ -1,9 +1,9 @@
 const utils = require('./utils');
 
 module.exports = function (context) {
-  var cordovaAbove8 = utils.isCordovaAbove(context, 8);
-  var child_process;
-  var deferral;
+  const cordovaAbove8 = utils.isCordovaAbove(context, 8);
+  let child_process;
+  let deferral;
   
   if (cordovaAbove8) {
     child_process = require('child_process');
@@ -13,7 +13,7 @@ module.exports = function (context) {
     deferral = context.requireCordovaModule('q').defer();
   }
 
-  var output = child_process.exec('npm install', {cwd: __dirname}, function (error) {
+  const output = child_process.exec('npm install', {cwd: __dirname}, function (error) {
     if (error !== null) {
       console.log('exec error: ' + error);
       deferral.reject('npm installation failed');
