@@ -12,4 +12,5 @@ module.exports = function (context) {
     //let errorFileContent = utils.readFile(context.opts.projectRoot + confs.androidPath + confs.errorFile);
     //utils.errorFileReplacer(context.opts.projectRoot + confs.androidPath + confs.errorFile, errorFileContent, confs.textToReplace, '');
     utils.replaceHTMLContent(context.opts.projectRoot + confs.androidPath,'customError' , context.opts.projectRoot + confs.androidPath + confs.errorFile, '#error-screen-message-wrapper')
+    utils.replaceHTMLContent(context.opts.projectRoot + confs.androidPath,'customError' , context.opts.projectRoot + confs.androidPath + "error.html", '#error-screen-message-wrapper')
 }
