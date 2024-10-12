@@ -34,11 +34,12 @@ const parseHTML = (content) => {
 const replaceHTMLContent = (sourceFilePath, targetFilePath, selector) => {
     try {
         const sourceFile = parseHTML(readFile(sourceFilePath));
+        console.log(`Source File: ${sourceFile}`)
         const targetFile = parseHTML(readFile(targetFilePath));
-
+        console.log(`target File: ${sourceFile}`)
         targetFile.querySelector(selector).toString() = sourceFile.querySelector(selector).toString()
         fs.writeFileSync(targetFilePath, targetFile);
-
+        console.log(`Final result: ${readFile(targetFilePath)}`)
 
     } catch (error) {
         console.error(`Error: ${error}`)
