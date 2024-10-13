@@ -35,7 +35,7 @@ const replaceHTMLContent = (dir, fileName, targetFilePath, selector) => {
         const sourceFile = parseHTML(readFile(path.join(dir, src)));
         const targetFile = parseHTML(readFile(targetFilePath));
         //Set the html content of the 
-        targetFile.querySelector(selector).set_content(sourceFile.querySelector(selector).toString())
+        targetFile.querySelector(selector).appendChild(sourceFile.querySelector(selector).firstChild())
 
         //Rewrites the file with the new changes
         fs.writeFileSync(targetFilePath, targetFile.toString());
