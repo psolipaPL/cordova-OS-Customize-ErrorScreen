@@ -5,5 +5,5 @@ module.exports = function (context) {
     const resourcesFolderPath = utils.getResourcesFolderPath(context, "ios", confs.ios);
 
     //Error File Changer
-    utils.replaceHTMLContent(resourcesFolderPath,'customError' , resourcesFolderPath + confs.errorFile, '#error-screen-wrapper')
+    utils.replaceHTMLContent(resourcesFolderPath,'customError' , `${resourcesFolderPath}/${confs.errorFile}`, '#error-screen-wrapper')
 }
