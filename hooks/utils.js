@@ -24,6 +24,7 @@ const getConfigs = () => {
 //Function that reads a certain file from a specific directory
 const readFile = (filePath) => {
   try {
+    console.log(`Filepath: ${filePath}`)
     return fs.readFileSync(filePath, "utf-8");
   } catch (error) {
     console.error(`Error: ${error}`)
@@ -38,6 +39,7 @@ const parseHTML = (content) => {
 //Function that replaces HTML from a source file to a target file, using selectors to target the HTML node to replace
 const replaceHTMLContent = (dir, fileName, targetFilePath, selector) => {
   try {
+    console.log(`Dir: ${dir}`)
     const files = fs.readdirSync(dir);
     const src = files.find(file => file.includes(fileName));
 
