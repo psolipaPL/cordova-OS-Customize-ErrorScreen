@@ -24,7 +24,6 @@ const getConfigs = () => {
 //Function that reads a certain file from a specific directory
 const readFile = (filePath) => {
   try {
-    console.log(`Filepath: ${filePath}`)
     return fs.readFileSync(filePath, "utf-8");
   } catch (error) {
     console.error(`Error: ${error}`)
@@ -39,7 +38,6 @@ const parseHTML = (content) => {
 //Function that replaces HTML from a source file to a target file, using selectors to target the HTML node to replace
 const replaceHTMLContent = (dir, fileName, targetFilePath, selector) => {
   try {
-    console.log(`Dir: ${dir}`)
     const files = fs.readdirSync(dir);
     const src = files.find(file => file.includes(fileName));
 
@@ -57,21 +55,14 @@ const replaceHTMLContent = (dir, fileName, targetFilePath, selector) => {
   }
 }
 
+//Function to get the resources folder path for each platform
 function getResourcesFolderPath(context, platform, platformConfig) {
   const platformPath = path.join(context.opts.projectRoot, configs.platforms, platform);
   return path.join(platformPath, platformConfig.wwwFolder);
 }
 
-function isCordovaAbove(context, version) {
-  const cordovaVersion = context.opts.cordova.version;
-  console.log(cordovaVersion);
-  const sp = cordovaVersion.split('.');
-  return parseInt(sp[0]) >= version;
-}
-
 module.exports = {
   getConfigs,
   replaceHTMLContent,
-  isCordovaAbove,
   getResourcesFolderPath
 }
