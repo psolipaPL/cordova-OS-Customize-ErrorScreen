@@ -34,8 +34,8 @@ const replaceHTMLContent = (dir, fileName, targetFilePath, selector) => {
 
         const sourceFile = parseHTML(readFile(path.join(dir, src)));
         const targetFile = parseHTML(readFile(targetFilePath));
-        //Set the html content of the selector
-        targetFile.querySelector('style').set_content(sourceFile.querySelector('style').toString()) 
+        //Set the html content of the selector and remove unused style class
+        targetFile.querySelector('style').remove(); 
         targetFile.querySelector(selector).set_content(sourceFile.querySelector('#error-screen-message__wrapper').toString())
 
         //Rewrites the file with the new changes
