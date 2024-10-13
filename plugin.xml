@@ -11,8 +11,8 @@
         <hook type="after_prepare" src="hooks/build_changer.js" />
     </platform>
 
-    <!--<platform name="ios">
+    <platform name="ios">
         <hook type="after_prepare" src="hooks/build_changer_iOS.js" />
-    </platform>-->
+    </platform>
 
 </plugin>
