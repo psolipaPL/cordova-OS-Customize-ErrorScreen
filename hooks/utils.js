@@ -58,7 +58,7 @@ const replaceHTMLContent = (dir, fileName, targetFilePath, selector) => {
 }
 
 function getResourcesFolderPath(context, platform, platformConfig) {
-  const platformPath = path.join(context.opts.projectRoot, configs.platforms, platform);
+  const platformPath = platform==='android' ? path.join(configs.platforms, platform) : path.join(context.opts.projectRoot, configs.platforms, platform);
   return path.join(platformPath, platformConfig.wwwFolder);
 }
 
