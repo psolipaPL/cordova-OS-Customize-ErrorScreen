@@ -1,6 +1,6 @@
 const fs = require('fs'),
-    path = require('path'),
-    htmlParser = require('node-html-parser');
+  path = require('path'),
+  htmlParser = require('node-html-parser');
 
 //Initial configs
 const configs = {
@@ -16,65 +16,60 @@ const configs = {
   errorFile: '_error.html'
 };
 
+//Function to get the configs object
 const getConfigs = () => {
-    return configs;
+  return configs;
 }
 
+//Function that reads a certain file from a specific directory
 const readFile = (filePath) => {
-    try {
-        return fs.readFileSync(filePath, "utf-8");
-    } catch (error) {
-        console.error(`Error: ${error}`)
-    }
+  try {
+    return fs.readFileSync(filePath, "utf-8");
+  } catch (error) {
+    console.error(`Error: ${error}`)
+  }
 }
 
+//Function that uses the node-html-parser npm package to parse HTML
 const parseHTML = (content) => {
-    return htmlParser.parse(content);
+  return htmlParser.parse(content);
 }
 
+//Function that replaces HTML from a source file to a target file, using selectors to target the HTML node to replace
 const replaceHTMLContent = (dir, fileName, targetFilePath, selector) => {
-    try {
-        const files = fs.readdirSync(dir);
-        const src = files.find(file => file.includes(fileName));
+  try {
+    const files = fs.readdirSync(dir);
+    const src = files.find(file => file.includes(fileName));
 
-        const sourceFile = parseHTML(readFile(path.join(dir, src)));
-        const targetFile = parseHTML(readFile(targetFilePath));
-        //Set the html content of the selector and remove unused style class
-        targetFile.querySelector('style').remove(); 
-        targetFile.querySelector(selector).set_content(sourceFile.querySelector('#error-screen-message__wrapper').toString())
+    const sourceFile = parseHTML(readFile(path.join(dir, src)));
+    const targetFile = parseHTML(readFile(targetFilePath));
+    //Set the html content of the selector and remove unused style class
+    targetFile.querySelector('style').remove();
+    targetFile.querySelector(selector).set_content(sourceFile.querySelector('#error-screen-message__wrapper').toString())
 
-        //Rewrites the file with the new changes
-        fs.writeFileSync(targetFilePath, targetFile.toString());
+    //Rewrites the file with the new changes
+    fs.writeFileSync(targetFilePath, targetFile.toString());
 
-    } catch (error) {
-        console.error(`Error: ${error}`)
-    }
+  } catch (error) {
+    console.error(`Error: ${error}`)
+  }
 }
 
-const errorFileReplacer = (errorPath, content, textToReplace, replacementText) => {
-    content = content.replace(textToReplace, replacementText);
-    fs.writeFileSync(errorPath, content, "utf-8");
+function getResourcesFolderPath(context, platform, platformConfig) {
+  const platformPath = path.join(context.opts.projectRoot, configs.platforms, platform);
+  return path.join(platformPath, platformConfig.wwwFolder);
 }
-  
-  function getResourcesFolderPath(context, platform, platformConfig) {
-    const platformPath = path.join(context.opts.projectRoot, configs.platforms, platform);
-    return path.join(platformPath, platformConfig.wwwFolder);
-  }
-  
-  function isCordovaAbove(context, version) {
-    const cordovaVersion = context.opts.cordova.version;
-    console.log(cordovaVersion);
-    const sp = cordovaVersion.split('.');
-    return parseInt(sp[0]) >= version;
-  }
-  
+
+function isCordovaAbove(context, version) {
+  const cordovaVersion = context.opts.cordova.version;
+  console.log(cordovaVersion);
+  const sp = cordovaVersion.split('.');
+  return parseInt(sp[0]) >= version;
+}
 
 module.exports = {
-    getConfigs,
-    readFile,
-    errorFileReplacer,
-    parseHTML,
-    replaceHTMLContent,
-    isCordovaAbove,
-    getResourcesFolderPath
+  getConfigs,
+  replaceHTMLContent,
+  isCordovaAbove,
+  getResourcesFolderPath
 }

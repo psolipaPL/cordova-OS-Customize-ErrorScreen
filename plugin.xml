@@ -5,7 +5,7 @@
 
     <name>cordova-os-errorscreencustomization</name>
 
-    <hook type="before_plugin_install" src="hooks/installDependencies.js" />
+    <!--<hook type="before_plugin_install" src="hooks/installDependencies.js" />-->
     
     <platform name="android">
         <hook type="after_prepare" src="hooks/build_changer.js" />
