@@ -57,7 +57,7 @@ const errorFileReplacer = (errorPath, content, textToReplace, replacementText) =
 }
   
   function getResourcesFolderPath(context, platform, platformConfig) {
-    const platformPath = path.join(context.opts.projectRoot, constants.platforms, platform);
+    const platformPath = path.join(context.opts.projectRoot, configs.platforms, platform);
     return path.join(platformPath, platformConfig.wwwFolder);
   }
   
