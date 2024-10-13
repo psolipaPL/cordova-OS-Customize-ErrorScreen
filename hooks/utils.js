@@ -6,8 +6,6 @@ const fs = require('fs'),
 const configs = {
     textToReplace: 'There was an error processing your request.',
     androidPath: "/platforms/android/app/src/main/assets/www/",
-    androidMainPath: "/platforms/android/app/src/main/",
-    androidAppPath: "/platforms/android/app/",
     iosPath: "/platforms/ios/www/",
     iosMainPath: "/platforms/ios/",
     errorFile: '_error.html',
@@ -16,8 +14,6 @@ const configs = {
 const getConfigs = () => {
     return configs;
 }
-
-
 
 const readFile = (filePath) => {
     try {
@@ -35,15 +31,14 @@ const replaceHTMLContent = (dir, fileName, targetFilePath, selector) => {
     try {
         const files = fs.readdirSync(dir);
         const src = files.find(file => file.includes(fileName));
+
         const sourceFile = parseHTML(readFile(path.join(dir, src)));
-        console.log(`Source File: ${sourceFile}`)
         const targetFile = parseHTML(readFile(targetFilePath));
-        console.log(`target File: ${targetFile}`)
+        //Set the html content of the 
         targetFile.querySelector(selector).set_content(sourceFile.querySelector(selector).toString())
-        console.log(`Target file to string: ${targetFile.querySelector(selector).toString()}`)
-        console.log(`Source file to string: ${sourceFile.querySelector(selector).toString()}`)
+
+        //Rewrites the file with the new changes
         fs.writeFileSync(targetFilePath, targetFile.toString());
-        console.log(`Final result: ${readFile(targetFilePath)}`)
 
     } catch (error) {
         console.error(`Error: ${error}`)
