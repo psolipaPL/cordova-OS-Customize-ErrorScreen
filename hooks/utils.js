@@ -61,14 +61,6 @@ const errorFileReplacer = (errorPath, content, textToReplace, replacementText) =
     return path.join(platformPath, platformConfig.wwwFolder);
   }
   
-  function getPlatformConfigs(platform) {
-    if (platform === configs.android.platform) {
-      return configs.android;
-    } else if (platform === configs.ios.platform) {
-      return configs.ios;
-    }
-  }
-  
   function isCordovaAbove(context, version) {
     const cordovaVersion = context.opts.cordova.version;
     console.log(cordovaVersion);
@@ -84,6 +76,5 @@ module.exports = {
     parseHTML,
     replaceHTMLContent,
     isCordovaAbove,
-    getResourcesFolderPath,
-    getPlatformConfigs,
+    getResourcesFolderPath
 }
